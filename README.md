@@ -10,7 +10,7 @@
 - **Résumé rapide** : Obtiens des descriptions simplifiées des failles.
 - **Analyse avec IA** : Profite d'explications détaillées et pédagogiques.
 
-#### Comment utiliser
+#### Comment utiliser (Pas encore Utilisatble)
 
 1. Clone le dépôt.
 2. Installe les dépendances.
