@@ -1,20 +1,22 @@
-import cve_scraper
-import summarizer
-import ai_explainer
+# main.py
+from cve_search import fetch_cve_by_criteria
+from summarizer import summarize_cve
 
 def main():
-    # Récupérer les CVE
-    cve_data = cve_scraper.get_cve_data()
+    criteria = "date=2024-11-27&type=network&system=linux"  # Exemple de critères supplémentaires
+    try:
+        cve_data_list = fetch_cve_by_criteria(criteria)
+        if cve_data_list:
+            for cve_data in cve_data_list:
+                summary, important_info = summarize_cve(cve_data['summary'])
+                print(f"CVE ID: {cve_data['id']}")
+                print("Résumé de la CVE :", summary)
+                print("Informations importantes :", important_info)
+                print("-" * 80)
+        else:
+            print("Aucun CVE trouvé.")
+    except Exception as e:
+        print(e)
 
-    # Résumer les CVE récupérées
-    summaries = summarizer.summarize_cves(cve_data)
-
-    # Utiliser l'IA pour expliquer les CVE
-    explanations = ai_explainer.explain_with_ai(summaries)
-
-    # Afficher ou retourner les résultats
-    for cve, explanation in zip(summaries, explanations):
-        print(f"CVE: {cve['id']}\nExplication: {explanation}\n")
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
